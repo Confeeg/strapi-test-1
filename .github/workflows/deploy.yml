@@ -19,10 +19,10 @@ jobs:
       # Setup key
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.GAURF_GIT }}" > "$HOME/.ssh/gaurf_git"
-      - run: chmod 600 "$HOME/.ssh/gaurf_git"
+      - run: echo "${{ secrets.GAURF_GIT }}" > "$HOME/.ssh/GAURF_GIT"
+      - run: chmod 600 "$HOME/.ssh/GAURF_GIT"
       # Build
       # - run: npm ci
       # - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -i $HOME/.ssh/gaurf_git -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
+      - run: rsync -e "ssh -i $HOME/.ssh/GAURF_GIT -o StrictHostKeyChecking=no" --archive --compress --delete . root@194.67.116.187:/www/wwwroot/gaurf.ru
