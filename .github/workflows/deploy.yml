@@ -16,6 +16,6 @@ jobs:
       - run: echo "$" > "$HOME/.ssh/gaurf_git"
       - run: chmod 600 "$HOME/.ssh/gaurf_git"
       # Build
-      - run: npm run build
+      # - run: npm run build
       # Deploy
       - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/gaurf_git -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
