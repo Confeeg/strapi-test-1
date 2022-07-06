@@ -3,7 +3,7 @@ export default {
     locales: ['ru'],
     translations: {
       ru: {
-        'app.components.LeftMenu.navbrand.title': 'Тест1',
+        'app.components.LeftMenu.navbrand.title': 'Тест2',
         'app.components.HomePage.welcome': 'Тестовый проект',
       },
     }
