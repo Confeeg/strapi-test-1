@@ -9,12 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.1.0
-      with:
-        fetch-depth: 2
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
-      with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
+      - uses: actions/checkout@v2
+      # Setup key
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "$" > "$HOME/.ssh/gaurf_git"
+      - run: chmod 600 "$HOME/.ssh/gaurf_git"
+      # Build
+      - run: npm run build
+      # Deploy
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/gaurf_git -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
