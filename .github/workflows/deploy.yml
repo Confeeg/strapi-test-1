@@ -8,15 +8,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       # Setup key
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "$" > "$HOME/.ssh/gaurf_git"
+      - run: echo "${{ secrets.gaurf_git }}" > "$HOME/.ssh/gaurf_git"
       - run: chmod 600 "$HOME/.ssh/gaurf_git"
       # Build
-      # - run: npm ci
-      # - run: npm run build
+      - run: npm ci
+      - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -i $HOME/.ssh/gaurf_git -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
+      - run: rsync -e "ssh -i $HOME/.ssh/gaurf_git -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
