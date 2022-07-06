@@ -18,4 +18,4 @@ jobs:
       # Build
       # - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/GAURF_GIT -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
+      - run: rsync -e "ssh -i $HOME/.ssh/GAURF_GIT -o StrictHostKeyChecking=no" --archive --compress --delete . 194.67.116.187:/www/wwwroot/gaurf.ru
